@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/gorilla-cli-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/gorilla-cli-{{ version }}.tar.gz
   sha256: bf375230a06fac99ba56f14f49474466036f072751cd1d5a1908e8ace561856c
 
 build:
@@ -14,14 +14,14 @@ build:
     - gorilla=go_cli:main
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - requests
     - halo
     - prompt-toolkit
@@ -35,6 +35,7 @@ test:
     #- gorilla --help
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/gorilla-llm/gorilla-cli
